@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV - Paweł Kwiatkowski</title>
+    <link id="theme" rel="stylesheet" href="style/red.css" />
+  </head>
+  <body>
+    <h1>Paweł Kwiatkowski</h1>
+
+    <header>
+      <nav class="navbar">
+        <ul class="nav-links">
+          <li><a href="#about">O mnie</a></li>
+          <li><a href="#contact">Kontakt</a></li>
+          <li><a href="#experience">Doświadczenie</a></li>
+          <li><a href="#skills">Umiejętności</a></li>
+          <li><a href="#education">Edukacja</a></li>
+          <li><a href="#projects">Projekty</a></li>
+        </ul>
+      </nav>
+      <button onclick="toggleTheme()">Zmień motyw</button>
+    </header>
+
+    <section id="about">
+      <h2>O mnie</h2>
+      <img
+        src="assets/img/mojeimg.jpg"
+        alt="Zdjęcie profilowe"
+        width="150"
+        height="150"
+      />
+      <p>
+        Jestem studentem trzeciego roku Informatyki na
+        <a href="https://vistula.edu.pl/" target="_blank">AFiB Vistula</a>.
+        <br />
+        Zajmuję się projektowaniem stron internetowych oraz aplikacji webowych,
+        prowadzę także pozalekcyjne zajęcia z programowania dla dzieci.
+      </p>
+    </section>
+
+    <section id="contact">
+      <h2>Kontakt</h2>
+      <p>
+        Email:
+        <a href="mailto:pawel8889@interia.pl">pawel8889@interia.pl</a>
+      </p>
+      <p>Telefon: 123-456-789</p>
+      <p>Miasto: Warszawa</p>
+    </section>
+
+    <section id="experience">
+      <h2>Doświadczenie</h2>
+      <article>
+        BRAK komercyjnego doświadczenia
+        <br />
+        Kilka projektów szkolnych i prywatnych
+      </article>
+      <article>
+        <h2>Kursy</h2>
+        <ul>
+          <li>
+            Kurs Tworzenia Stron WWW w HTML i CSS od Podstaw do Eksperta -
+            <a
+              href="https://www.udemy.com/course/kurs-tworzenia-stron-www-w-html-i-css-od-podstaw-do-eksperta/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Link do kursu
+            </a>
+          </li>
+          <li>
+            Angular - The Complete Guide -
+            <a
+              href="https://www.udemy.com/course/the-complete-guide-to-angular-2/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Link do kursu
+            </a>
+          </li>
+        </ul>
+      </article>
+    </section>
+
+    <section id="skills">
+      <h2>Umiejętności</h2>
+      <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>Node.js</li>
+        <li>Express.js</li>
+        <li>Angular</li>
+        <li>GitHub</li>
+      </ul>
+    </section>
+
+    <section id="education">
+      <h2>Edukacja</h2>
+      <p>
+        II Liceum Ogólnokształcące im. Marii Skłodowskiej-Curie
+        <br />
+        2019 - 2023
+      </p>
+      <p>
+        Studia inżynierskie na kierunku Informatyka na AFiB Vistula
+        <br />
+        2023 - obecnie
+      </p>
+    </section>
+
+    <section id="projects">
+      <div class="section-header">
+        <h2>Projekty</h2>
+        <button class="toggle-section-btn" onclick="toggleProjects()">
+          Ukryj
+        </button>
+      </div>
+
+      <div id="projects-content">
+        <ul>
+          <li>
+            QR Code Generator -
+            <a
+              href="https://github.com/Weskiii/QR_Code_Generator"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Link do projektu
+            </a>
+          </li>
+          <li>
+            Budget Planner -
+            <a
+              href="https://github.com/Weskiii/Budget_Planner"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Link do projektu
+            </a>
+          </li>
+          <li>
+            Task Manager -
+            <a
+              href="https://github.com/Weskiii/01-starting-project"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Link do projektu
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>Kwiatkowski Paweł &copy; 2026</footer>
+
+    <script src="script/script.js"></script>
+  </body>
+</html>
