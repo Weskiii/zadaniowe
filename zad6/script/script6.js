@@ -84,4 +84,33 @@ if (form) {
       form.reset();
     }
   });
+
+  fetch("data.json")
+    .then((response) => response.json())
+    .then((data) => {
+      const skillsList = document.getElementById("skills-list");
+
+      data.skills.forEach((skill) => {
+        const li = document.createElement("li");
+        li.textContent = skill;
+        skillsList.appendChild(li);
+      });
+
+      const projectsList = document.getElementById("projects-list");
+
+      data.projects.forEach((project) => {
+        const li = document.createElement("li");
+
+        const a = document.createElement("a");
+        a.href = project.link;
+        a.textContent = "Link do projektu";
+        a.target = "_blank";
+
+        li.textContent = project.name + " - ";
+        li.appendChild(a);
+
+        projectsList.appendChild(li);
+      });
+    })
+    .catch((error) => console.error("Błąd ładowania JSON:", error));
 }
