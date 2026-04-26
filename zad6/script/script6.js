@@ -1,10 +1,10 @@
 function toggleTheme() {
   const theme = document.getElementById("theme");
 
-  if (theme.getAttribute("href") === "style/red5.css") {
-    theme.setAttribute("href", "style/green5.css");
+  if (theme.getAttribute("href") === "style/red6.css") {
+    theme.setAttribute("href", "style/green6.css");
   } else {
-    theme.setAttribute("href", "style/red5.css");
+    theme.setAttribute("href", "style/red6.css");
   }
 }
 

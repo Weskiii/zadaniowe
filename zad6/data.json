@@ -1,0 +1,25 @@
+{
+  "skills": [
+    "HTML",
+    "CSS",
+    "JavaScript 66666",
+    "Node.js",
+    "Express.js",
+    "Angular",
+    "GitHub"
+  ],
+  "projects": [
+    {
+      "name": "QR Code Generator 66666",
+      "link": "https://github.com/Weskiii/QR_Code_Generator"
+    },
+    {
+      "name": "Budget Planner 66666",
+      "link": "https://github.com/Weskiii/Budget_Planner"
+    },
+    {
+      "name": "Task Manager 66666",
+      "link": "https://github.com/Weskiii/01-starting-project"
+    }
+  ]
+}
