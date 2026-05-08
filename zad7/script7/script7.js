@@ -84,33 +84,115 @@ if (form) {
       form.reset();
     }
   });
-
-  fetch("data.json")
-    .then((response) => response.json())
-    .then((data) => {
-      const skillsList = document.getElementById("skills-list");
-
-      data.skills.forEach((skill) => {
-        const li = document.createElement("li");
-        li.textContent = skill;
-        skillsList.appendChild(li);
-      });
-
-      const projectsList = document.getElementById("projects-list");
-
-      data.projects.forEach((project) => {
-        const li = document.createElement("li");
-
-        const a = document.createElement("a");
-        a.href = project.link;
-        a.textContent = "Link do projektu";
-        a.target = "_blank";
-
-        li.textContent = project.name + " - ";
-        li.appendChild(a);
-
-        projectsList.appendChild(li);
-      });
-    })
-    .catch((error) => console.error("Błąd ładowania JSON:", error));
 }
+
+const skillsList = document.getElementById("skills-list");
+const projectsList = document.getElementById("projects-list");
+const projectForm = document.getElementById("project-form");
+const projectNameInput = document.getElementById("projectName");
+const projectLinkInput = document.getElementById("projectLink");
+const projectNameError = document.getElementById("projectNameError");
+const projectLinkError = document.getElementById("projectLinkError");
+
+let projects = [];
+
+function saveProjectsToLocalStorage() {
+  localStorage.setItem("projects", JSON.stringify(projects));
+}
+
+function loadProjectsFromLocalStorage() {
+  const savedProjects = localStorage.getItem("projects");
+
+  if (savedProjects) {
+    projects = JSON.parse(savedProjects);
+    renderProjects();
+  } else {
+    fetch("data.json")
+      .then((response) => response.json())
+      .then((data) => {
+        projects = data.projects;
+        saveProjectsToLocalStorage();
+        renderProjects();
+      })
+      .catch((error) => console.error("Błąd ładowania JSON:", error));
+  }
+}
+
+function renderProjects() {
+  projectsList.innerHTML = "";
+
+  projects.forEach((project, index) => {
+    const li = document.createElement("li");
+
+    const a = document.createElement("a");
+    a.href = project.link;
+    a.textContent = "Link do projektu";
+    a.target = "_blank";
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Usuń";
+    deleteButton.classList.add("delete-project-btn");
+
+    deleteButton.addEventListener("click", function () {
+      projects.splice(index, 1);
+      saveProjectsToLocalStorage();
+      renderProjects();
+    });
+
+    li.textContent = project.name + " - ";
+    li.appendChild(a);
+    li.appendChild(deleteButton);
+
+    projectsList.appendChild(li);
+  });
+}
+
+if (projectForm) {
+  projectForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const projectName = projectNameInput.value.trim();
+    const projectLink = projectLinkInput.value.trim();
+
+    projectNameError.textContent = "";
+    projectLinkError.textContent = "";
+
+    let isValid = true;
+
+    if (projectName === "") {
+      projectNameError.textContent = "Podaj nazwę projektu.";
+      isValid = false;
+    }
+
+    if (projectLink === "") {
+      projectLinkError.textContent = "Podaj link do projektu.";
+      isValid = false;
+    }
+
+    if (isValid) {
+      const newProject = {
+        name: projectName,
+        link: projectLink,
+      };
+
+      projects.push(newProject);
+      saveProjectsToLocalStorage();
+      renderProjects();
+
+      projectForm.reset();
+    }
+  });
+}
+
+fetch("data.json")
+  .then((response) => response.json())
+  .then((data) => {
+    data.skills.forEach((skill) => {
+      const li = document.createElement("li");
+      li.textContent = skill;
+      skillsList.appendChild(li);
+    });
+  })
+  .catch((error) => console.error("Błąd ładowania JSON:", error));
+
+loadProjectsFromLocalStorage();
