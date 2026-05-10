@@ -278,6 +278,11 @@ form {
   margin: 10px 0;
   font-weight: 700;
 }
+  
+#stale-projekty li {
+  margin: 10px 0;
+  font-weight: 700;
+}
 
 .delete-project-btn {
   margin-left: 10px;

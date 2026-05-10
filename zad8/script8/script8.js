@@ -24,7 +24,7 @@ function toggleProjects() {
 const form = document.getElementById("contact-form");
 
 if (form) {
-  form.addEventListener("submit", function (event) {
+  form.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const firstName = document.getElementById("firstName").value.trim();
@@ -79,9 +79,33 @@ if (form) {
     }
 
     if (isValid) {
-      successMessage.textContent =
-        "Formularz został poprawnie wypełniony. Dziękuję za kontakt!";
-      form.reset();
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            firstName,
+            lastName,
+            email,
+            message
+          })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          successMessage.textContent =
+            "Formularz został wysłany i zapisany w bazie danych SQLite.";
+          form.reset();
+        } else {
+          successMessage.textContent = "Nie udało się zapisać formularza.";
+        }
+      } catch (error) {
+        console.error("Błąd wysyłania formularza:", error);
+        successMessage.textContent = "Błąd połączenia z serwerem.";
+      }
     }
   });
 }
@@ -94,34 +118,21 @@ const projectLinkInput = document.getElementById("projectLink");
 const projectNameError = document.getElementById("projectNameError");
 const projectLinkError = document.getElementById("projectLinkError");
 
-let projects = [];
+async function loadProjectsFromDatabase() {
+  try {
+    const response = await fetch("/api/projects");
+    const projects = await response.json();
 
-function saveProjectsToLocalStorage() {
-  localStorage.setItem("projects", JSON.stringify(projects));
-}
-
-function loadProjectsFromLocalStorage() {
-  const savedProjects = localStorage.getItem("projects");
-
-  if (savedProjects) {
-    projects = JSON.parse(savedProjects);
-    renderProjects();
-  } else {
-    fetch("data.json")
-      .then((response) => response.json())
-      .then((data) => {
-        projects = data.projects;
-        saveProjectsToLocalStorage();
-        renderProjects();
-      })
-      .catch((error) => console.error("Błąd ładowania JSON:", error));
+    renderProjects(projects);
+  } catch (error) {
+    console.error("Błąd pobierania projektów:", error);
   }
 }
 
-function renderProjects() {
+function renderProjects(projects) {
   projectsList.innerHTML = "";
 
-  projects.forEach((project, index) => {
+  projects.forEach((project) => {
     const li = document.createElement("li");
 
     const a = document.createElement("a");
@@ -133,10 +144,12 @@ function renderProjects() {
     deleteButton.textContent = "Usuń";
     deleteButton.classList.add("delete-project-btn");
 
-    deleteButton.addEventListener("click", function () {
-      projects.splice(index, 1);
-      saveProjectsToLocalStorage();
-      renderProjects();
+    deleteButton.addEventListener("click", async function () {
+      await fetch(`/api/projects/${project.id}`, {
+        method: "DELETE"
+      });
+
+      loadProjectsFromDatabase();
     });
 
     li.textContent = project.name + " - ";
@@ -148,7 +161,7 @@ function renderProjects() {
 }
 
 if (projectForm) {
-  projectForm.addEventListener("submit", function (event) {
+  projectForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const projectName = projectNameInput.value.trim();
@@ -170,16 +183,23 @@ if (projectForm) {
     }
 
     if (isValid) {
-      const newProject = {
-        name: projectName,
-        link: projectLink,
-      };
+      try {
+        await fetch("/api/projects", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            name: projectName,
+            link: projectLink
+          })
+        });
 
-      projects.push(newProject);
-      saveProjectsToLocalStorage();
-      renderProjects();
-
-      projectForm.reset();
+        projectForm.reset();
+        loadProjectsFromDatabase();
+      } catch (error) {
+        console.error("Błąd dodawania projektu:", error);
+      }
     }
   });
 }
@@ -195,4 +215,4 @@ fetch("data.json")
   })
   .catch((error) => console.error("Błąd ładowania JSON:", error));
 
-loadProjectsFromLocalStorage();
+loadProjectsFromDatabase();

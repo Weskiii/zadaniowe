@@ -1,10 +1,14 @@
 const sqlite3 = require("sqlite3").verbose();
+const path = require("path");
 
-const db = new sqlite3.Database("./database.sqlite", (error) => {
+const dbPath = path.join(__dirname, "database.sqlite");
+
+const db = new sqlite3.Database(dbPath, (error) => {
   if (error) {
-    console.error("Błąd połączenia z bazą danych:", error.message);
+    console.error("Błąd połączenia z bazą:", error.message);
   } else {
-    console.log("Połączono z bazą danych SQLite.");
+    console.log("Połączono z SQLite.");
+    console.log("Ścieżka bazy:", dbPath);
   }
 });
 
