@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV - Paweł Kwiatkowski</title>
+    <link id="theme" rel="stylesheet" href="style8/red8.css" />
+  </head>
+  <body>
+    <h1>Paweł Kwiatkowski 66666</h1>
+
+    <header>
+      <nav class="navbar">
+        <ul class="nav-links">
+          <li><a href="#about">O mnie</a></li>
+          <li><a href="#contact">Kontakt</a></li>
+          <li><a href="#experience">Doświadczenie</a></li>
+          <li><a href="#skills">Umiejętności</a></li>
+          <li><a href="#education">Edukacja</a></li>
+          <li><a href="#projects">Projekty</a></li>
+          <li><a href="#form">Formularz</a></li>
+        </ul>
+      </nav>
+      <button onclick="toggleTheme()">Zmień motyw</button>
+    </header>
+
+    <section id="about">
+      <h2>O mnie</h2>
+      <img
+        src="assets8/img/mojeimg8.jpg"
+        alt="Zdjęcie profilowe"
+        width="150"
+        height="150"
+      />
+      <p>
+        Jestem studentem trzeciego roku Informatyki na
+        <a href="https://vistula.edu.pl/" target="_blank">AFiB Vistula</a>.
+        <br />
+        Zajmuję się projektowaniem stron internetowych oraz aplikacji webowych,
+        prowadzę także pozalekcyjne zajęcia z programowania dla dzieci.
+      </p>
+    </section>
+
+    <section id="contact">
+      <h2>Kontakt</h2>
+      <p>
+        Email:
+        <a href="mailto:pawel8889@interia.pl">pawel8889@interia.pl</a>
+      </p>
+      <p>Telefon: 123-456-789</p>
+      <p>Miasto: Warszawa</p>
+    </section>
+
+    <section id="experience">
+      <h2>Doświadczenie</h2>
+      <article>
+        BRAK komercyjnego doświadczenia
+        <br />
+        Kilka projektów szkolnych i prywatnych
+      </article>
+      <article>
+        <h2>Kursy</h2>
+        <ul>
+          <li>
+            Kurs Tworzenia Stron WWW w HTML i CSS od Podstaw do Eksperta -
+            <a
+              href="https://www.udemy.com/course/kurs-tworzenia-stron-www-w-html-i-css-od-podstaw-do-eksperta/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Link do kursu
+            </a>
+          </li>
+          <li>
+            Angular - The Complete Guide -
+            <a
+              href="https://www.udemy.com/course/the-complete-guide-to-angular-2/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Link do kursu
+            </a>
+          </li>
+        </ul>
+      </article>
+    </section>
+
+    <section id="skills">
+      <h2>Umiejętności 66666</h2>
+      <ul id="skills-list"></ul>
+    </section>
+
+    <section id="education">
+      <h2>Edukacja</h2>
+      <p>
+        II Liceum Ogólnokształcące im. Marii Skłodowskiej-Curie
+        <br />
+        2019 - 2023
+      </p>
+      <p>
+        Studia inżynierskie na kierunku Informatyka na AFiB Vistula
+        <br />
+        2023 - obecnie
+      </p>
+    </section>
+
+    <section id="projects">
+      <div class="section-header">
+        <h2>Projekty 66666</h2>
+        <button class="toggle-section-btn" onclick="toggleProjects()">
+          Ukryj
+        </button>
+      </div>
+
+      <div id="projects-content">
+        <form id="project-form">
+          <div class="form-group">
+            <label for="projectName">Nazwa projektu</label>
+            <input type="text" id="projectName" placeholder="np. Portfolio" />
+            <small class="error" id="projectNameError"></small>
+          </div>
+
+          <div class="form-group">
+            <label for="projectLink">Link do projektu</label>
+            <input
+              type="url"
+              id="projectLink"
+              placeholder="https://github.com/..."
+            />
+            <small class="error" id="projectLinkError"></small>
+          </div>
+
+          <button type="submit">Dodaj projekt</button>
+        </form>
+
+        <ul id="projects-list"></ul>
+      </div>
+    </section>
+
+    <section id="form">
+      <h2>Formularz kontaktowy</h2>
+
+      <form id="contact-form" novalidate>
+        <div class="form-group">
+          <label for="firstName">Imię</label>
+          <input type="text" id="firstName" name="firstName" />
+          <small class="error" id="firstNameError"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Nazwisko</label>
+          <input type="text" id="lastName" name="lastName" />
+          <small class="error" id="lastNameError"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" />
+          <small class="error" id="emailError"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Wiadomość</label>
+          <textarea id="message" name="message" rows="5"></textarea>
+          <small class="error" id="messageError"></small>
+        </div>
+
+        <button type="submit">Wyślij</button>
+        <p id="successMessage" class="success"></p>
+      </form>
+    </section>
+
+    <footer>Kwiatkowski Paweł &copy; 2026</footer>
+
+    <script src="script8/script8.js"></script>
+  </body>
+</html>
